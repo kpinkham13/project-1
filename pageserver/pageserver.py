@@ -95,7 +95,8 @@ def respond(sock):
             transmit(STATUS_FORBIDDEN, sock)
             transmit("\nRequest contains illegal characters\n", sock)
         elif parts[1].endswith("trivia.html") or parts[1].endswith("trivia.css"):
-            f = open('./pages/' + str(path))
+            options = get_options()
+            f = open(options.DOCROOT + '/' +  str(path))
             f = f.read()            
             transmit(STATUS_OK, sock)
             transmit(f, sock)
