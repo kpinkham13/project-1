@@ -12,7 +12,7 @@
   located in ./pages  (where '.' is the directory from which this
   program is run).
 """
-
+import os
 import config    # Configure from .ini files and command line
 import logging   # Better than print statements
 logging.basicConfig(format='%(levelname)s:%(message)s',
@@ -94,7 +94,7 @@ def respond(sock):
         if '..' in path or '~' in path:
             transmit(STATUS_FORBIDDEN, sock)
             transmit("\nRequest contains illegal characters\n", sock)
-        elif parts[1].endswith("trivia.html") or parts[1].endswith("trivia.css"):
+        elif os.path.isfile(path):
             options = get_options()
             f = open(options.DOCROOT + '/' +  str(path))
             f = f.read()            
